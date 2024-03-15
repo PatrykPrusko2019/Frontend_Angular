@@ -1,0 +1,21 @@
+<div *ngIf="provider">
+  <h2>{{provider.companyName | uppercase}} Details</h2>
+  <div><span>id: </span>{{provider.id}}</div>
+  <div>
+    <label for="provider-companyName">Provider companyName: </label>
+    <input id="provider-companyName" readonly [(ngModel)]="provider.companyName" placeholder="provider name" />
+  </div>
+  <div>
+    <label for="provider-city">Provider city: </label>
+    <input id="provider-city" readonly [(ngModel)]="provider.city" placeholder="provider city" />
+  </div>
+  <div>
+    <label for="provider-street">Provider street: </label>
+    <input id="provider-street" readonly [(ngModel)]="provider.street" placeholder="provider street" />
+  </div>
+  <div>
+    <label for="provider-zipCode">Provider zipCode: </label>
+    <input id="provider-zipCode" readonly [(ngModel)]="provider.zipCode" placeholder="provider zipCode" />
+  </div>
+  <button type="button" class="btn btn-primary" (click)="goBack()">go back</button>
+</div>
