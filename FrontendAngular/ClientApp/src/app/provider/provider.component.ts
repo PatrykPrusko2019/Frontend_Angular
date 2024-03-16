@@ -42,4 +42,6 @@ export class ProviderComponent implements OnInit {
     this.providers = this.providers.filter(p => p !== provider);
     this.providerService.delete(provider.id).subscribe();
   }
+
+
 }

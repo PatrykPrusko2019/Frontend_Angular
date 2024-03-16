@@ -3,19 +3,20 @@
   <div><span>id: </span>{{provider.id}}</div>
   <div>
     <label for="provider-companyName">Provider companyName: </label>
-    <input id="provider-companyName" readonly [(ngModel)]="provider.companyName" placeholder="provider name" />
+    <input id="provider-companyName" [(ngModel)]="provider.companyName" placeholder="provider name" />
   </div>
   <div>
     <label for="provider-city">Provider city: </label>
-    <input id="provider-city" readonly [(ngModel)]="provider.city" placeholder="provider city" />
+    <input id="provider-city" [(ngModel)]="provider.city" placeholder="provider city" />
   </div>
   <div>
     <label for="provider-street">Provider street: </label>
-    <input id="provider-street" readonly [(ngModel)]="provider.street" placeholder="provider street" />
+    <input id="provider-street" [(ngModel)]="provider.street" placeholder="provider street" />
   </div>
   <div>
     <label for="provider-zipCode">Provider zipCode: </label>
-    <input id="provider-zipCode" readonly [(ngModel)]="provider.zipCode" placeholder="provider zipCode" />
+    <input id="provider-zipCode" [(ngModel)]="provider.zipCode" placeholder="provider zipCode" />
   </div>
+  <button type="button" class="btn btn-primary" (click)="save()">Save</button>
   <button type="button" class="btn btn-primary" (click)="goBack()">Return</button>
 </div>

@@ -12,6 +12,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ProviderComponent } from './provider/provider.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProviderDetailsComponent } from './subProvider/provider-details/provider-details.component';
+import { ProviderUpdateComponent } from './subProvider/provider-update/provider-update.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProviderDetailsComponent } from './subProvider/provider-details/provide
     CounterComponent,
     FetchDataComponent,
     ProviderComponent,
-    ProviderDetailsComponent
+    ProviderDetailsComponent,
+    ProviderUpdateComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,6 +35,7 @@ import { ProviderDetailsComponent } from './subProvider/provider-details/provide
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'provider', component: ProviderComponent },
       { path: 'subProvider/details/:id', component: ProviderDetailsComponent },
+      { path: 'subProvider/update/:id', component: ProviderUpdateComponent },
     ]),
     BrowserAnimationsModule
   ],

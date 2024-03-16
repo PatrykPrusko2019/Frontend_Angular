@@ -5,11 +5,11 @@ import { ProviderDto } from '../../models/provider/providerDto';
 import { ProviderService } from '../../provider/provider.service';
 
 @Component({
-  selector: 'app-provider-details',
-  templateUrl: './provider-details.component.html',
-  styleUrls: ['./provider-details.component.css']
+  selector: 'app-provider-update',
+  templateUrl: './provider-update.component.html',
+  styleUrls: ['./provider-update.component.css']
 })
-export class ProviderDetailsComponent implements OnInit {
+export class ProviderUpdateComponent implements OnInit {
   provider: ProviderDto | undefined;
 
   constructor(
@@ -32,6 +32,12 @@ export class ProviderDetailsComponent implements OnInit {
     this.location.back();
   }
 
-  
+  save(): void {
+    if (this.provider) {
+      this.providerService.update(this.provider)
+        .subscribe(() => this.goBack());
+    }
+  }
+
 
 }

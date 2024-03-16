@@ -59,6 +59,14 @@ export class ProviderService {
     );
   }
 
+  /** PUT: update the provider on the server */
+  update(provider: ProviderDto): Observable<ProviderDto> {
+    return this.http.put<ProviderDto>(`${this.providerUrl}/${provider.id}`, provider, this.httpOptions).pipe(
+      tap(_ => this.log(`updated provider id=${provider.id}`)),
+      catchError(this.handleError<any>('update'))
+    );
+  }
+
 
 
   private handleError<T>(operation = 'operation', result?: T) {

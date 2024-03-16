@@ -50,8 +50,12 @@
       <td>{{ provider.street }}</td>
       <td>{{ provider.zipCode }}</td>
       <td>
-          <a class="btn btn-primary" routerLink="/subProvider/details/{{ provider.id }}" >Details</a>
+        <a class="btn btn-primary" routerLink="/subProvider/details/{{ provider.id }}">Details</a>
       </td>
+      <td>
+        <a class="btn btn-primary" routerLink="/subProvider/update/{{ provider.id }}">Update</a>
+      </td>
+
       <td>
         <button type="button"
                 class="btn btn-primary"
