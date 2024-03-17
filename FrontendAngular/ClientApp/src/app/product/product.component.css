@@ -10,15 +10,15 @@ input {
 }
 
 
-  button:hover {
-    background-color: #cfd8dc;
-  }
+button:hover {
+  background-color: #cfd8dc;
+}
 
-  button:disabled {
-    background-color: #eee;
-    color: #ccc;
-    cursor: auto;
-  }
+button:disabled {
+  background-color: #eee;
+  color: #ccc;
+  cursor: auto;
+}
 
 
 .btn-primary {
@@ -27,3 +27,5 @@ input {
   margin-bottom: 2rem;
   margin-top: 1rem;
 }
+
+

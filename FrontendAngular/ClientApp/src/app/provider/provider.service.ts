@@ -4,32 +4,35 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { ProviderDto } from '../models/provider/providerDto';
-import { CreateProviderDto } from '../models/provider/createProviderDto';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProviderService {
+
   private providerUrl = 'https://localhost:7067/api/provider';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(
-    private http: HttpClient) { }
 
-  /** GET heroes from the server */
+  constructor(
+    private http: HttpClient, private toastr: ToastrService) { }
+
+    
+  /** GET providers from the server */
   getAll(): Observable<ProviderDto[]> {
     return this.http.get<ProviderDto[]>(this.providerUrl)
       .pipe(
-        tap(_ => this.log('fetched heroes')),
+        tap(_ => this.log('fetched providers')),
         catchError(this.handleError<ProviderDto[]>('getAll', []))
       );
   }
 
-  /** GET hero by id. Will 404 if id not found */
+  /** GET provider by id. Will 404 if id not found */
   getById(id: number): Observable<ProviderDto> {
     const url = `${this.providerUrl}/${id}`;
     return this.http.get<ProviderDto>(url).pipe(
@@ -40,16 +43,16 @@ export class ProviderService {
 
   //////// Save methods //////////
 
-  /** POST: add a new hero to the server */
+  /** POST: add a new provider to the server */
   createProvider(providerDto: ProviderDto): Observable<ProviderDto> { 
     return this.http.post<ProviderDto>(this.providerUrl, providerDto, this.httpOptions).pipe(
       tap((newProvider: ProviderDto) => this.log(`added provider w/ id=${newProvider.id}`)),
-      catchError(this.handleError<ProviderDto>('providerDto'))
+      catchError(this.handleError<ProviderDto>('createProvider'))
     );
 
   }
 
-  /** DELETE: delete the hero from the server */
+  /** DELETE: delete the provider from the server */
   delete(id: number): Observable<ProviderDto> {
     const url = `${this.providerUrl}/${id}`;
 
@@ -72,6 +75,7 @@ export class ProviderService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
+      this.toastr.error(error.message, ' ');
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
@@ -83,8 +87,8 @@ export class ProviderService {
     };
   }
 
-  /** Log a HeroService message with the MessageService */
+  /** Log a ProviderService message with the MessageService */
   private log(message: string) {
-   //this.messageService.add(`HeroService: ${message}`);
+   //this.messageService.add(`ProviderService: ${message}`);
   }
 }

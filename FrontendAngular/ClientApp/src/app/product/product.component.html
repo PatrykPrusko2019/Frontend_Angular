@@ -1,0 +1,90 @@
+
+
+<h2>List of Products</h2>
+
+
+<div>
+
+  <div class="form-group">
+    <form [formGroup]="userForm" (submit)="onSubmit()">
+
+      <div>
+        <label for="new-product">Name: </label>
+        <input type="text" id="new-product" #productName formControlName="name" />
+        <div *ngIf="userForm.controls.name.invalid && userForm.controls.name.touched" class="text-danger">Name is required.</div>
+      </div>
+
+      <div>
+        <label for="new-product">Code: </label>
+        <input id="new-product" #productCode />
+      </div>
+
+      <div>
+        <label for="new-product">Price: </label>
+        <input type="text" id="new-product" #productPrice formControlName="price" />
+        <div *ngIf="userForm.controls.price.invalid && userForm.controls.price.touched" class="text-danger">price must be number.</div>
+      </div>
+
+
+      <div>
+        <label for="new-product">Unit Pieces: </label>
+        <input type="text" id="new-product" #productUnitPieces formControlName="unitPieces" />
+        <div *ngIf="userForm.controls.unitPieces.invalid && userForm.controls.unitPieces.touched" class="text-danger">unit Pieces must be number.</div>
+      </div>
+
+      <div>
+        <label for="new-product">Admission Document Id: </label>
+        <input type="text" id="new-product" #productAdmissionDocumentId formControlName="admissionDocumentId" />
+        <div *ngIf="userForm.controls.admissionDocumentId.invalid && userForm.controls.admissionDocumentId.touched" class="text-danger">Admission Document Id must be number.</div>
+      </div>
+
+        </form>
+  </div>
+
+
+  <!-- (click) passes input value to add() and then clears the input -->
+
+  <div>
+    <button type="button" class="btn btn-primary" (click)="createProduct(productName.value, productCode.value, productPrice.value, productUnitPieces.value, productAdmissionDocumentId.value ); productName.value=''; productCode.value='' ; productPrice.value='' ; productUnitPieces.value='' ; productAdmissionDocumentId.value='' ">
+      Add Product
+    </button>
+  </div>
+
+</div>
+
+
+
+<table class='table table-hover table-dark' id="myTable" aria-labelledby="tableLabel" *ngIf="products.length">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Code</th>
+      <th>Price</th>
+      <th>Unit Pieces</th>
+      <th>Admission Document Id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.code }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.unitPieces }}</td>
+      <td>{{ product.admissionDocumentId }}</td>
+
+      <td>
+        <a class="btn btn-primary" routerLink="/subProduct/details/{{ product.id }}">Details</a>
+      </td>
+
+
+    </tr>
+
+  </tbody>
+
+</table>
+
+
+<script src="js/script.js"></script>
+<script src="https://browser.sentry-cdn.com/7.107.0/bundle.min.js"></script>

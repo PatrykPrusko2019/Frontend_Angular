@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateProviderDto } from '../models/provider/createProviderDto';
 import { ProviderDto } from '../models/provider/providerDto';
 import { ProviderService } from './provider.service';
 
