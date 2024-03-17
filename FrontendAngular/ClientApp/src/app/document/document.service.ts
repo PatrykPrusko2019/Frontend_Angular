@@ -29,6 +29,16 @@ export class DocumentService {
       );
   }
 
+  /** GET document by id. Will 404 if id not found */
+  getById(id: number): Observable<DocumentDto> {
+    const url = `${this.documentUrl}/${id}`;
+    return this.http.get<DocumentDto>(url).pipe(
+      tap(_ => this.log(`fetched document id=${id}`)),
+      catchError(this.handleError<DocumentDto>(`getById id=${id}`))
+    );
+  }
+
+
   //////// Save methods //////////
 
   /** POST: add a new document to the server */
@@ -40,11 +50,29 @@ export class DocumentService {
 
   }
 
+  /** PUT: update the document on the server */
+  update(document: DocumentDto): Observable<DocumentDto> {
+    return this.http.put<DocumentDto>(`${this.documentUrl}/${document.id}`, document, this.httpOptions).pipe(
+      tap(_ => this.log(`updated document id=${document.id}`)),
+      catchError(this.handleError<any>('update'))
+    );
+  }
+
+  /** DELETE: delete the document from the server */
+  delete(id: number): Observable<DocumentDto> {
+    const url = `${this.documentUrl}/${id}`;
+
+    return this.http.delete<DocumentDto>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted document id=${id}`)),
+      catchError(this.handleError<DocumentDto>('deleteDocument'))
+    );
+  }
+
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      this.toastr.error(error.message, ' ');
+      this.toastr.error("ERROR: " + error.status, ' ');
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
@@ -58,6 +86,7 @@ export class DocumentService {
 
   /** Log a DocumentService message with the MessageService */
   private log(message: string) {
+    this.toastr.error("SUCCESS: " + message.toString());
     //this.messageService.add(`DocumentService: ${message}`);
   }
 }

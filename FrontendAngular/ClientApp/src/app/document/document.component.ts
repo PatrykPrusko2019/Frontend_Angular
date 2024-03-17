@@ -47,4 +47,9 @@ export class DocumentComponent implements OnInit {
       });
   }
 
+  delete(document: DocumentDto): void {
+    this.documents = this.documents.filter(p => p !== document);
+    this.documentService.delete(document.id).subscribe();
+  }
+
 }

@@ -1,0 +1,30 @@
+<div *ngIf="document">
+<h2> Update given Document</h2>
+<div><span>id: </span>{{document.id}}</div>
+
+<div class="form-group">
+  <form [formGroup]="userForm" (submit)="onSubmit()">
+
+    <div>
+      <label for="document-targetWarehouse">Document targetWarehouse: </label>
+      <input id="document-targetWarehouse" [(ngModel)]="document.targetWarehouse" placeholder="document targetWarehouse" formControlName="targetWarehouse" />
+      <div *ngIf="userForm.controls.targetWarehouse.invalid && userForm.controls.targetWarehouse.touched" class="text-danger">targetWarehouse is required. ( Only: existing storage name )</div>
+    </div>
+    <div>
+      <label for="document-vendor">Document vendor: </label>
+      <input id="document-vendor" [(ngModel)]="document.vendor" placeholder="document vendor" formControlName="vendor" />
+      <div *ngIf="userForm.controls.vendor.invalid && userForm.controls.vendor.touched" class="text-danger">vendor is required. ( Only: existing provider name )</div>
+    </div>
+    <div>
+      <label for="document-approvedDocument">Document approvedDocument: </label>
+      <input id="document-approvedDocument" [(ngModel)]="document.approvedDocument" placeholder="document approvedDocument" formControlName="approvedDocument" />
+      <div *ngIf="userForm.controls.approvedDocument.invalid && userForm.controls.approvedDocument.touched" class="text-danger">approvedDocument is required. ( Only: APPROVED , WAIT , CANCELLED )</div>
+    </div>
+    
+
+  </form>
+</div>
+
+<button type="button" class="btn btn-primary" (click)="save()">Save</button>
+<button type="button" class="btn btn-primary" (click)="goBack()">Return</button>
+</div>

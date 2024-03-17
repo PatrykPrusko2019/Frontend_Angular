@@ -20,6 +20,7 @@ import { ProductDetailsComponent } from './subProduct/product-details/product-de
 import { ProductUpdateComponent } from './subProduct/product-update/product-update.component';
 import { StorageComponent } from './storage/storage.component';
 import { DocumentComponent } from './document/document.component';
+import { DocumentUpdateComponent } from './subDocument/document-update/document-update.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { DocumentComponent } from './document/document.component';
     ProductDetailsComponent,
     ProductUpdateComponent,
     StorageComponent,
-    DocumentComponent
+    DocumentComponent,
+    DocumentUpdateComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -60,6 +62,7 @@ import { DocumentComponent } from './document/document.component';
       { path: 'subProduct/update/:id', component: ProductUpdateComponent },
       { path: 'storage', component: StorageComponent },
       { path: 'document', component: DocumentComponent },
+      { path: 'subDocument/update/:id', component: DocumentUpdateComponent },
     ]),
     BrowserAnimationsModule
   ],

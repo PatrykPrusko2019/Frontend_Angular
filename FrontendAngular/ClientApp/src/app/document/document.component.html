@@ -53,22 +53,40 @@
   </thead>
   <tbody>
     <tr *ngFor="let document of documents">
-      <td>{{ document.id }}</td>
-      <td>{{ document.targetWarehouse }}</td>
+
+      <td> {{ document.id }}</td>
+      <td> {{ document.targetWarehouse }}</td>
       <td>{{ document.vendor }}</td>
       <td>{{ document.providerId }}</td>
       <td>{{ document.storageId }}</td>
-
       <td>{{ document.products.length }}</td>
-
       <td>{{ document.labels.length }}</td>
       <td>{{ document.approvedDocument }}</td>
+
+      <td>
+        <a class="btn btn-primary" routerLink="/subDocument/update/{{ document.id }}">Update</a>
+      </td>
+
+      <td>
+        <button type="button"
+                class="btn btn-primary"
+                title="delete document"
+                (click)="delete(document)">
+          Delete
+        </button>
+      </td>
+
+
+
 
     </tr>
 
   </tbody>
 
 </table>
+
+<button onclick="toggleRowVisibility()">Toggle Row Visibility</button>
+
 
 
 <script src="js/script.js"></script>
@@ -83,6 +101,17 @@
     }
 
     refreshBtn.addEventListener("click", handleClick);
+
+  function toggleRowVisibility() {
+    var hiddenRow = document.getElementById("hidden-row");
+
+    if (hiddenRow.style.display === "none") {
+      hiddenRow.style.display = "";
+    } else {
+      hiddenRow.style.display = "none";
+    }
+  }
+
 
 </script>
 

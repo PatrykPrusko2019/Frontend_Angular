@@ -75,7 +75,7 @@ export class ProviderService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      this.toastr.error(error.message, ' ');
+      this.toastr.error("ERROR: " + error.status, ' ');
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
@@ -89,6 +89,7 @@ export class ProviderService {
 
   /** Log a ProviderService message with the MessageService */
   private log(message: string) {
+    this.toastr.error("SUCCESS: " + message.toString());
    //this.messageService.add(`ProviderService: ${message}`);
   }
 }

@@ -100,6 +100,7 @@ export class ProductService {
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
+    this.toastr.error("SUCCESS: " + message.toString());
     this.messageService.add(`ProductService: ${message}`);
   }
 }
