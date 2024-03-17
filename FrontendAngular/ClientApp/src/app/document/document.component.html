@@ -1,0 +1,89 @@
+
+<h2>List of Documents</h2>
+
+
+<div>
+
+  <div class="form-group">
+    <form [formGroup]="userForm" (submit)="onSubmit()">
+
+      <div>
+        <label for="new-document">TargetWarehouse: </label>
+        <input id="new-document" #documentTargetWarehouse formControlName="targetWarehouse" />
+        <div *ngIf="userForm.controls.targetWarehouse.invalid && userForm.controls.targetWarehouse.touched" class="text-danger">targetWarehouse is required. (specify the format: nameStorage;nameSymbol , if you want to add a new storage and symbol)</div>
+      </div>
+      <div>
+        <label for="new-document">ProviderId: </label>
+        <input id="new-document" #documentProviderId formControlName="providerId" />
+        <div *ngIf="userForm.controls.providerId.invalid && userForm.controls.providerId.touched" class="text-danger">providerId is required. (enter the existing providerId number)</div>
+      </div>
+      <div>
+        <label for="new-document">LabelNames: </label>
+        <input id="new-document" #documentLabelNames formControlName="labelNames" />
+        <div *ngIf="userForm.controls.labelNames.invalid && userForm.controls.labelNames.touched" class="text-danger">labelNames is required. (correct format: Firstlabelname;Secondlabelname , if you want to create more than one label)</div>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <div>
+    <button type="button" id="refreshButton" class="btn btn-primary" (click)="createDocument(documentTargetWarehouse.value, documentProviderId.value, documentLabelNames.value ); documentTargetWarehouse.value=''; documentProviderId.value='' ; documentLabelNames.value=''">
+      Add Document
+    </button>
+  </div>
+
+
+</div>
+  
+
+
+<table class='table table-hover table-dark' id="myTable" aria-labelledby="tableLabel" *ngIf="documents.length">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>targetWarehouse</th>
+      <th>Vendor</th>
+      <th>ProviderId</th>
+      <th>StorageId</th>
+      <th>Products</th>
+      <th>Labels</th>
+      <th>ApprovedDocument</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let document of documents">
+      <td>{{ document.id }}</td>
+      <td>{{ document.targetWarehouse }}</td>
+      <td>{{ document.vendor }}</td>
+      <td>{{ document.providerId }}</td>
+      <td>{{ document.storageId }}</td>
+
+      <td>{{ document.products.length }}</td>
+
+      <td>{{ document.labels.length }}</td>
+      <td>{{ document.approvedDocument }}</td>
+
+    </tr>
+
+  </tbody>
+
+</table>
+
+
+<script src="js/script.js"></script>
+<script src="https://browser.sentry-cdn.com/7.107.0/bundle.min.js"></script>
+
+
+<script>
+    const refreshBtn = document.getElementById("refreshButton");
+
+    function handleClick() {
+      window.location.reload();
+    }
+
+    refreshBtn.addEventListener("click", handleClick);
+
+</script>
+
+

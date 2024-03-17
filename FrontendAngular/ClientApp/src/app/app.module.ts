@@ -19,6 +19,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProductDetailsComponent } from './subProduct/product-details/product-details.component';
 import { ProductUpdateComponent } from './subProduct/product-update/product-update.component';
 import { StorageComponent } from './storage/storage.component';
+import { DocumentComponent } from './document/document.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { StorageComponent } from './storage/storage.component';
     MessageComponent,
     ProductDetailsComponent,
     ProductUpdateComponent,
-    StorageComponent
+    StorageComponent,
+    DocumentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -57,6 +59,7 @@ import { StorageComponent } from './storage/storage.component';
       { path: 'subProduct/details/:id', component: ProductDetailsComponent },
       { path: 'subProduct/update/:id', component: ProductUpdateComponent },
       { path: 'storage', component: StorageComponent },
+      { path: 'document', component: DocumentComponent },
     ]),
     BrowserAnimationsModule
   ],
