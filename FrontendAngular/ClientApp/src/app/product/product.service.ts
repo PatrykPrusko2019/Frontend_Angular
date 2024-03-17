@@ -51,6 +51,24 @@ export class ProductService {
     );
   }
 
+  /** PUT: update the product on the server */
+  update(product: ProductDto): Observable<ProductDto> {
+    return this.http.put<ProductDto>(`${this.productUrl}/${product.id}`, product, this.httpOptions).pipe(
+      tap(_ => this.log(`updated product id=${product.id}`)),
+      catchError(this.handleError<any>('update'))
+    );
+  }
+
+  /** DELETE: delete the product from the server */
+  delete(id: number): Observable<ProductDto> {
+    const url = `${this.productUrl}/${id}`;
+
+    return this.http.delete<ProductDto>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted product id=${id}`)),
+      catchError(this.handleError<ProductDto>('delete'))
+    );
+  }
+
 
   /**
   * Handle Http operation that failed.

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProviderDto } from '../models/provider/providerDto';
 import { ProviderService } from './provider.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { min } from 'rxjs';
+
 
 @Component({
   selector: 'app-provider',
@@ -13,9 +16,20 @@ export class ProviderComponent implements OnInit {
   constructor(private providerService: ProviderService) { }
 
 
+  userForm = new FormGroup({
+
+    companyName: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    street: new FormControl('', Validators.required),
+    zipCode: new FormControl('', Validators.required),
+  });
+
+  onSubmit() { }
+
   ngOnInit(): void {
     this.getAll();
   }
+
 
   getAll(): void {
     this.providerService.getAll()

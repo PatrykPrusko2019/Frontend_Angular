@@ -16,6 +16,7 @@ export class ProductComponent implements OnInit {
   userForm = new FormGroup({
 
     name: new FormControl('', Validators.required),
+    code: new FormControl('', Validators.required),
     price: new FormControl('', Validators.pattern("^[0-9]*$")),
     unitPieces: new FormControl('', Validators.pattern("^[0-9]*$")),
     admissionDocumentId: new FormControl('', Validators.pattern("^[0-9]*$")),
@@ -47,5 +48,10 @@ export class ProductComponent implements OnInit {
       .subscribe(product => {
         this.products.push(product); this.getAll(); //location.reload()
       });
+  }
+
+  delete(product: ProductDto): void {
+    this.products = this.products.filter(p => p !== product);
+    this.productService.delete(product.id).subscribe();
   }
 }

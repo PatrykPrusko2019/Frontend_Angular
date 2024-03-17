@@ -1,0 +1,35 @@
+<div *ngIf="product">
+  <h2>{{product.name | uppercase}} Update</h2>
+  <div><span>id: </span>{{product.id}}</div>
+
+  <div class="form-group">
+    <form [formGroup]="userForm" (submit)="onSubmit()">
+
+      <div>
+        <label for="product-name">Product name: </label>
+        <input type="text" id="product-name" [(ngModel)]="product.name" placeholder="product name" #productName formControlName="name" />
+        <div *ngIf="userForm.controls.name.invalid && userForm.controls.name.touched" class="text-danger">Name is required.</div>
+      </div>
+      <div>
+        <label for="product-code">Product code: </label>
+        <input type="text" id="product-code" [(ngModel)]="product.code" placeholder="product code" #productCode formControlName="code" />
+        <div *ngIf="userForm.controls.code.invalid && userForm.controls.code.touched" class="text-danger">Code is required.</div>
+      </div>
+      <div>
+        <label for="product-price">Product price: </label>
+        <input type="text" id="product-price" [(ngModel)]="product.price" placeholder="product price" #productPrice formControlName="price"/>
+        <div *ngIf="userForm.controls.price.invalid && userForm.controls.price.touched" class="text-danger">Price must be number.</div>
+      </div>
+
+      <div>
+        <label for="product-unitPieces">Product unitPieces: </label>
+        <input type="text" id="product-unitPieces" [(ngModel)]="product.unitPieces" placeholder="product unitPieces" #productUnitPieces formControlName="unitPieces" />
+        <div *ngIf="userForm.controls.unitPieces.invalid && userForm.controls.unitPieces.touched" class="text-danger">unitPieces must be number.</div>
+      </div>
+
+    </form>
+  </div>
+
+  <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+  <button type="button" class="btn btn-primary" (click)="goBack()">Return</button>
+</div>

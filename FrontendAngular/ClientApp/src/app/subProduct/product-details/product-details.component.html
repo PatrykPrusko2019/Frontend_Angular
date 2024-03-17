@@ -1,6 +1,7 @@
 <div *ngIf="product">
   <h2>{{product.name | uppercase}} Details</h2>
   <div><span>id: </span>{{product.id}}</div>
+
   <div>
     <label for="product-name">Product name: </label>
     <input id="product-name" readonly [(ngModel)]="product.name" placeholder="product name" />
@@ -17,5 +18,11 @@
     <label for="product-unitPieces">Product unitPieces: </label>
     <input id="product-unitPieces" readonly [(ngModel)]="product.unitPieces" placeholder="product unitPieces" />
   </div>
+  <div>
+    <label for="product-admissionDocumentId">Product admissionDocumentId: </label>
+    <input id="product-admissionDocumentId" readonly [(ngModel)]="product.admissionDocumentId" placeholder="product admissionDocumentId" />
+  </div>
+
   <button type="button" class="btn btn-primary" (click)="goBack()">Return</button>
 </div>
+

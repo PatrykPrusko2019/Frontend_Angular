@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ProviderDto } from '../../models/provider/providerDto';
 import { ProviderService } from '../../provider/provider.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-provider-update',
@@ -17,6 +18,16 @@ export class ProviderUpdateComponent implements OnInit {
     private providerService: ProviderService,
     private location: Location
   ) { }
+
+  userForm = new FormGroup({
+
+    companyName: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    street: new FormControl('', Validators.required),
+    zipCode: new FormControl('', Validators.required),
+  });
+
+  onSubmit() { }
 
   ngOnInit(): void {
     this.getById();
