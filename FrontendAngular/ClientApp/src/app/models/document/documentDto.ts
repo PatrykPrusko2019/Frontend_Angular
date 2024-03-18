@@ -1,3 +1,4 @@
+import { ItemDto } from "../item/itemDto";
 import { LabelDto } from "../label/labelDto";
 import { ProductDto } from "../product/productDto";
 
@@ -12,4 +13,5 @@ export interface DocumentDto {
 
   labelNames: string,
   approvedDocument: string
+  items: [ItemDto],
 }

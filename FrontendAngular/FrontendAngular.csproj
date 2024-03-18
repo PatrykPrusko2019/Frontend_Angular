@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="ClientApp\src\app\models\document\" />
     <Folder Include="ClientApp\src\app\models\label\" />
+    <Folder Include="ClientApp\src\app\models\item\" />
     <Folder Include="ClientApp\src\app\models\product\" />
     <Folder Include="ClientApp\src\app\models\storage\" />
     <Folder Include="ClientApp\src\app\subDocument\" />

@@ -22,7 +22,7 @@
         <input id="new-document" #documentLabelNames formControlName="labelNames" />
         <div *ngIf="userForm.controls.labelNames.invalid && userForm.controls.labelNames.touched" class="text-danger">labelNames is required. (correct format: Firstlabelname;Secondlabelname , if you want to create more than one label)</div>
       </div>
-
+      
     </form>
   </div>
 
@@ -49,19 +49,21 @@
       <th>Products</th>
       <th>Labels</th>
       <th>ApprovedDocument</th>
+      <th>ItemsOfProduct</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let document of documents">
 
-      <td> {{ document.id }}</td>
-      <td> {{ document.targetWarehouse }}</td>
+      <td>{{ document.id }}</td>
+      <td>{{ document.targetWarehouse }}</td>
       <td>{{ document.vendor }}</td>
       <td>{{ document.providerId }}</td>
       <td>{{ document.storageId }}</td>
       <td>{{ document.products.length }}</td>
       <td>{{ document.labels.length }}</td>
       <td>{{ document.approvedDocument }}</td>
+      <td>{{ document.items.length }}</td>
 
       <td>
         <a class="btn btn-primary" routerLink="/subDocument/update/{{ document.id }}">Update</a>

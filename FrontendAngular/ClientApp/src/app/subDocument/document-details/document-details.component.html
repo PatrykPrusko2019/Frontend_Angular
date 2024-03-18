@@ -68,5 +68,32 @@
 
   </table>
 
+  <h2>List of ItemsOfProduct: {{ document.items.length }}</h2>
+
+  <table class='table table-hover table-dark' id="myTable" aria-labelledby="tableLabel" *ngIf="document.items.length">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>NameProduct</th>
+        <th>CodeProduct</th>
+        <th>ItemsOfProducts</th>
+        <th>Price</th>
+        <th>AdmissionDocumentId</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of document.items">
+        <td>{{ item.id }}</td>
+        <td>{{ item.nameProduct }}</td>
+        <td>{{ item.codeProduct }}</td>
+        <td>{{ item.itemsOfProducts }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.admissionDocumentId }}</td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
   <button type="button" class="btn btn-primary" (click)="goBack()">Return</button>
 </div>
