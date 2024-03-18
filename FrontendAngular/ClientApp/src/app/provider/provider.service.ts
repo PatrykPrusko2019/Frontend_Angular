@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { ProviderDto } from '../models/provider/providerDto';
 import { ToastrService } from 'ngx-toastr';
+import { MessageService } from '../message/message.service';
 
 
 @Injectable({
@@ -20,14 +21,14 @@ export class ProviderService {
 
 
   constructor(
-    private http: HttpClient, private toastr: ToastrService) { }
+    private http: HttpClient, private toastr: ToastrService, private messageService: MessageService) { }
 
     
   /** GET providers from the server */
   getAll(): Observable<ProviderDto[]> {
     return this.http.get<ProviderDto[]>(this.providerUrl)
       .pipe(
-        tap(_ => this.log('fetched providers')),
+        tap(_ => this.log('downloaded providers')),
         catchError(this.handleError<ProviderDto[]>('getAll', []))
       );
   }
@@ -36,7 +37,7 @@ export class ProviderService {
   getById(id: number): Observable<ProviderDto> {
     const url = `${this.providerUrl}/${id}`;
     return this.http.get<ProviderDto>(url).pipe(
-      tap(_ => this.log(`fetched provider id=${id}`)),
+      tap(_ => this.log(`downloaded provider id=${id}`)),
       catchError(this.handleError<ProviderDto>(`getById id=${id}`))
     );
   }
@@ -46,7 +47,7 @@ export class ProviderService {
   /** POST: add a new provider to the server */
   createProvider(providerDto: ProviderDto): Observable<ProviderDto> { 
     return this.http.post<ProviderDto>(this.providerUrl, providerDto, this.httpOptions).pipe(
-      tap((newProvider: ProviderDto) => this.log(`added provider w/ id=${newProvider.id}`)),
+      tap((newProvider: ProviderDto) => this.log(`added new provider`)),
       catchError(this.handleError<ProviderDto>('createProvider'))
     );
 
@@ -58,7 +59,7 @@ export class ProviderService {
 
     return this.http.delete<ProviderDto>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted provider id=${id}`)),
-      catchError(this.handleError<ProviderDto>('deleteHero'))
+      catchError(this.handleError<ProviderDto>('delete'))
     );
   }
 
@@ -76,11 +77,6 @@ export class ProviderService {
     return (error: any): Observable<T> => {
 
       this.toastr.error("ERROR: " + error.status, ' ');
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
@@ -89,7 +85,7 @@ export class ProviderService {
 
   /** Log a ProviderService message with the MessageService */
   private log(message: string) {
-    this.toastr.error("SUCCESS: " + message.toString());
-   //this.messageService.add(`ProviderService: ${message}`);
+    this.toastr.success("SUCCESS: " + message.toString());
+    this.messageService.add(`ProviderService: ${message}`);
   }
 }

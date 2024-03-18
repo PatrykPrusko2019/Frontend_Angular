@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { DocumentDto } from '../models/document/documentDto';
+import { MessageService } from '../message/message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +18,14 @@ export class DocumentService {
 
 
   constructor(
-    private http: HttpClient, private toastr: ToastrService) { }
+    private http: HttpClient, private toastr: ToastrService, private messageService: MessageService) { }
 
 
   /** GET documents from the server */
   getAll(): Observable<DocumentDto[]> {
     return this.http.get<DocumentDto[]>(this.documentUrl)
       .pipe(
-        tap(_ => this.log('fetched documents')),
+        tap(_ => this.log('downloaded documents')),
         catchError(this.handleError<DocumentDto[]>('getAll', []))
       );
   }
@@ -33,7 +34,7 @@ export class DocumentService {
   getById(id: number): Observable<DocumentDto> {
     const url = `${this.documentUrl}/${id}`;
     return this.http.get<DocumentDto>(url).pipe(
-      tap(_ => this.log(`fetched document id=${id}`)),
+      tap(_ => this.log(`downloaded document id=${id}`)),
       catchError(this.handleError<DocumentDto>(`getById id=${id}`))
     );
   }
@@ -44,7 +45,7 @@ export class DocumentService {
   /** POST: add a new document to the server */
   createDocument(documentDto: DocumentDto): Observable<DocumentDto> {
     return this.http.post<DocumentDto>(this.documentUrl, documentDto, this.httpOptions).pipe(
-      tap((newDocument: DocumentDto) => this.log(`added document w/ id=${newDocument.id}`)),
+      tap((newDocument: DocumentDto) => this.log(`added new document`)),
       catchError(this.handleError<DocumentDto>('createDucument'))
     );
 
@@ -73,12 +74,7 @@ export class DocumentService {
     return (error: any): Observable<T> => {
 
       this.toastr.error("ERROR: " + error.status, ' ');
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
+      
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
@@ -86,7 +82,7 @@ export class DocumentService {
 
   /** Log a DocumentService message with the MessageService */
   private log(message: string) {
-    this.toastr.error("SUCCESS: " + message.toString());
-    //this.messageService.add(`DocumentService: ${message}`);
+    this.toastr.success("SUCCESS: " + message.toString());
+    this.messageService.add(`DocumentService: ${message}`);
   }
 }

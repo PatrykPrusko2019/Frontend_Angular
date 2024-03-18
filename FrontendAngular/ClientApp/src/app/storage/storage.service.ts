@@ -27,7 +27,7 @@ export class StorageService {
   getAll(): Observable<StorageDto[]> {
     return this.http.get<StorageDto[]>(this.storageUrl)
       .pipe(
-        tap(_ => this.log('fetched storages')),
+        tap(_ => this.log('downloaded storages')),
         catchError(this.handleError<StorageDto[]>('getAll', []))
       );
   }
@@ -42,18 +42,8 @@ export class StorageService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
+      this.toastr.error(error.status, 'ERROR:')
 
-      this.toastr.error(error.status + " -> no found documentId, or Price, Unit Pieces must be number", 'ERROR:')
-
-
-
-      // TODO: send the error to remote logging infrastructure
-      this.log(error.status + " -> no found documentId, or Price, Unit Pieces must be number"); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
@@ -62,6 +52,7 @@ export class StorageService {
 
   /** Log a StorageService message with the MessageService */
   private log(message: string) {
+    this.toastr.success(message)
     this.messageService.add(`StorageService: ${message}`);
   }
 

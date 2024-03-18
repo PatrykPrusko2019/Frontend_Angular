@@ -28,7 +28,7 @@ export class ProductService {
   getAll(): Observable<ProductDto[]> {
     return this.http.get<ProductDto[]>(this.productUrl)
       .pipe(
-        
+        tap(_ => this.log('Downloaded products')),
         catchError(this.handleError<ProductDto[]>('getAll', []))
       );
   }
@@ -36,7 +36,7 @@ export class ProductService {
   /** POST: add a new product to the server */
   createProduct(productDto: ProductDto): Observable<ProductDto> {
     return this.http.post<ProductDto>(this.productUrl, productDto, this.httpOptions).pipe(
-      tap((newProduct: ProductDto) => this.log(`ADDED new product`)),
+      tap((newProduct: ProductDto) => this.log(`Added new product`)),
       catchError(this.handleError<ProductDto>('createProduct'))
     );
 
@@ -46,7 +46,7 @@ export class ProductService {
   getById(id: number): Observable<ProductDto> {
     const url = `${this.productUrl}/${id}`;
     return this.http.get<ProductDto>(url).pipe(
-      tap(_ => this.log(`fetched product id=${id}`)),
+      tap(_ => this.log(`Downloaded product id=${id}`)),
       catchError(this.handleError<ProductDto>(`getById id=${id}`))
     );
   }
@@ -62,7 +62,6 @@ export class ProductService {
   /** DELETE: delete the product from the server */
   delete(id: number): Observable<ProductDto> {
     const url = `${this.productUrl}/${id}`;
-
     return this.http.delete<ProductDto>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted product id=${id}`)),
       catchError(this.handleError<ProductDto>('delete'))
@@ -83,14 +82,6 @@ export class ProductService {
 
       this.toastr.error(error.status + " -> no found documentId, or Price, Unit Pieces must be number", 'ERROR:')
       
-
-
-      // TODO: send the error to remote logging infrastructure
-      this.log(error.status + " -> no found documentId, or Price, Unit Pieces must be number"); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
-
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
@@ -100,7 +91,7 @@ export class ProductService {
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
-    this.toastr.error("SUCCESS: " + message.toString());
+    this.toastr.success("SUCCESS: " + message.toString());
     this.messageService.add(`ProductService: ${message}`);
   }
 }
