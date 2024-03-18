@@ -20,7 +20,12 @@
       <input id="document-approvedDocument" [(ngModel)]="document.approvedDocument" placeholder="document approvedDocument" formControlName="approvedDocument" />
       <div *ngIf="userForm.controls.approvedDocument.invalid && userForm.controls.approvedDocument.touched" class="text-danger">approvedDocument is required. ( Only: APPROVED , WAIT , CANCELLED )</div>
     </div>
-    
+    <div>
+      <label for="document-labelNames">Document labelNames: </label>
+      <input id="document-labelNames" [(ngModel)]="document.labelNames" placeholder="document labelNames" formControlName="labelNames" />
+      <div *ngIf="userForm.controls.labelNames.invalid && userForm.controls.labelNames.touched" class="text-danger">labelNames can be empty. (you can add new label: enter new name, delete label: enter name of existing label  )</div>
+    </div>
+
 
   </form>
 </div>

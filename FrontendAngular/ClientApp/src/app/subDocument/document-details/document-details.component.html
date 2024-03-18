@@ -1,0 +1,72 @@
+<div *ngIf="document">
+  <h2>Details given Document</h2>
+  <div><span>id: </span>{{document.id}}</div>
+  <div>
+    <label for="document-targetWarehouse">Document targetWarehouse: </label>
+    <input id="document-targetWarehouse" readonly [(ngModel)]="document.targetWarehouse" placeholder="document targetWarehouse" />
+  </div>
+  <div>
+    <label for="document-storageId">Document storageId: </label>
+    <input id="document-storageId" readonly [(ngModel)]="document.storageId" placeholder="document storageId" />
+  </div>
+  <div>
+    <label for="document-vendor">Document vendor: </label>
+    <input id="provider-vendor" readonly [(ngModel)]="document.vendor" placeholder="document vendor" />
+  </div>
+  <div>
+    <label for="document-providerId">Document providerId: </label>
+    <input id="document-providerId" readonly [(ngModel)]="document.providerId" placeholder="document providerId" />
+  </div>
+  <div>
+    <label for="document-approvedDocument">Document approvedDocument: </label>
+    <input id="document-approvedDocument" readonly [(ngModel)]="document.approvedDocument" placeholder="document approvedDocument" />
+  </div>
+
+  <h2>List of Products: {{ document.products.length }}</h2>
+
+  <table class='table table-hover table-dark' id="myTable" aria-labelledby="tableLabel" *ngIf="document.products.length">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Price</th>
+        <th>Unit Pieces</th>
+        <th>Admission Document Id</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of document.products">
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.code }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.unitPieces }}</td>
+        <td>{{ product.admissionDocumentId }}</td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <h2>List of Labels: {{ document.labels.length }}</h2>
+
+  <table class='table table-hover table-dark' id="myTable" aria-labelledby="tableLabel" *ngIf="document.labels.length">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let label of document.labels">
+        <td>{{ label.id }}</td>
+        <td>{{ label.name }}</td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <button type="button" class="btn btn-primary" (click)="goBack()">Return</button>
+</div>

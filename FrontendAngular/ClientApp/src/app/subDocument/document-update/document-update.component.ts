@@ -25,6 +25,7 @@ export class DocumentUpdateComponent implements OnInit {
     targetWarehouse: new FormControl('', Validators.required),
     vendor: new FormControl('', Validators.required),
     approvedDocument: new FormControl('', Validators.required),
+    labelNames: new FormControl('', Validators.required),
   });
 
   onSubmit() { }

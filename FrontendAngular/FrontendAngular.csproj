@@ -26,6 +26,7 @@
     <Folder Include="ClientApp\src\app\models\label\" />
     <Folder Include="ClientApp\src\app\models\product\" />
     <Folder Include="ClientApp\src\app\models\storage\" />
+    <Folder Include="ClientApp\src\app\subDocument\" />
     <Folder Include="ClientApp\src\app\subProduct\" />
     <Folder Include="ClientApp\src\app\subProvider\" />
     <Folder Include="ClientApp\src\app\shared\components\errors\" />
